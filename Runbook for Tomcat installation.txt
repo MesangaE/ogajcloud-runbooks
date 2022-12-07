@@ -1,0 +1,46 @@
+Runbook for Tomcat installation
+
+Sudo apt update && sudo apt upgrade -y 
+
+Sep 1: install java open jdk 
+
+sudo apt install default-jdk -y
+
+java --version (get open jdk 11)
+
+Step 2: Install tomcat 
+
+sudo apt-cache search tomcat (check the latest version then modify the next command for installation)
+
+sudo apt install tomcat9 tomcat9-admin
+
+ss -ltn   (to check the port)
+
+sudo ufw allow from any to any port 8080 proto tcp  (open port 8080 for tomcat server)
+
+Test localhost:8080
+
+
+How to use Apache Tomcat Web Application Manager on Ubuntu 22.04:
+Step 1: Creating Tomcat User
+
+sudo vi /etc/tomcat9/tomcat-users.xml
+
+// Paste the following in the tomcat user file at the bottom before the closing command //
+
+<role rolename="admin-gui"/>
+
+<role rolename="manager-gui"/>
+
+<user username="tomcat" password="pass" roles="admin-gui,manager-gui"/>
+
+//save and exit//
+
+sudo systemctl restart tomcat9
+
+test by checking 
+
+http://127.0.0.1:8080/manager/html  (login with username and password as defined in the file )
+
+
+open security group at port https for security incase it doesnt allow you

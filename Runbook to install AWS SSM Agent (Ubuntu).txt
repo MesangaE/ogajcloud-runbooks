@@ -1,0 +1,13 @@
+Runbook to install AWS SSM Agent (Ubuntu)
+To install SSM Agent on Ubuntu Server 20.10 STR & 20.04, 18.04, and 16.04 LTS 64-bit instances (with Snap package)
+
+sudo snap install amazon-ssm-agent --classic
+
+sudo snap list amazon-ssm-agent
+
+sudo snap start amazon-ssm-agent
+
+sudo snap services amazon-ssm-agent
+
+NB: SSM Agent installer files locations
+On Ubuntu Server 20.10 STR & 20.04, 18.04, and 16.04 LTS (with Snap), SSM Agent installer files, including agent binaries and config files, are stored in the following directory: /snap/amazon-ssm-agent/current/. If you make changes to any configuration files in this directory, then you must copy these files from the /snap directory to the /etc/amazon/ssm/ directory. Log and library files haven't changed (/var/lib/amazon/ssm, /var/log/amazon/ssm).

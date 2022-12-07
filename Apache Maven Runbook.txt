@@ -1,0 +1,43 @@
+Apache Maven Runbook
+
+Step 1: Install Openjdk java
+
+sudo apt install default-jdk
+
+
+Step 2: download and extract Apche Maven
+
+wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+
+tar xzvf apache-maven-3.8.6-bin.tar.gz
+
+sudo ln -s /opt/apache-maven-3.8.6 /opt/maven
+
+//check environmental variable//
+
+echo $JAVA_HOME
+
+export PATH=/opt/maven/bin:$PATH    or
+
+
+
+Step 3: Set Up Environment Variables
+
+sudo vim /etc/profile.d/maven.sh
+
+// paste the following =>>
+
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}  //
+
+sudo chmod +x /etc/profile.d/maven.sh
+
+source /etc/profile.d/maven.sh
+
+mvn -v 
+
+
+
+mvn -v 

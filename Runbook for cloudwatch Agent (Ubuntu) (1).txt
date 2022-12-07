@@ -1,0 +1,42 @@
+Runbook for cloudwatch Agent (Ubuntu)
+
+Create an IAM role, Make sure that AWS service is selected under Select type of trusted entity. For Choose a use case, choose EC2 under Common use cases, Choose Next: Permissions. In the list of policies, select CloudWatchAgentServerPolicy & create an IAM role.
+
+
+Step 1: Download the CloudWatch agent:
+
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+
+Step 2: Install the package:
+
+dpkg -i -E ./amazon-cloudwatch-agent.deb
+
+Step 3: Update Packages & Install collectd: (This will take a few minutes if you haven’t updated your available updates prior)
+
+apt-get update -y
+
+curl -LOs http://mirrors.kernel.org/ubuntu/pool/universe/c/collectd/collectd-core_5.12.0-11_amd64.deb
+curl -LOs http://mirrors.kernel.org/ubuntu/pool/universe/c/collectd/collectd_5.12.0-11_amd64.deb
+
+sudo apt install -y ./collectd_5.12.0-11_amd64.deb ./collectd-core_5.12.0-11_amd64.deb 
+
+Step 4: Create the CloudWatch Agent Configuration File
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+
+// follow the options as per your system and usecase //
+
+* We can check json file under /opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+Step 5: Now check the status of CW agent.
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
+
+* if status is stopped, Status is stopped now, so start it & check status after that.
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+Step 6: Check Custom Metrics in AWS CloudWatch:
+
+
+for further details : https://gauravguptacloud.medium.com/aws-cloudwatch-agent-installation-for-memory-metric-integrate-with-grafana-365404154

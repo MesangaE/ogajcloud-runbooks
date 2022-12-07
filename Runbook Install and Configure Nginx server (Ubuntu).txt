@@ -1,0 +1,52 @@
+Runbook Install and Configure Nginx server (Ubuntu)
+
+step 1: Install Nginx
+
+sudo apt update
+sudo apt install nginx
+
+Step 2: creating a website
+
+Let’s create simple HTML page in /var/www/tutorial/ (it can be anything you want). Create index.html file in this location.
+
+cd /var/www
+sudo mkdir tutorial
+cd tutorial
+sudo "${EDITOR:-vi}" index.html
+
+(paste this in the index.html file =>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello, Nginx!</title>
+</head>
+<body>
+    <h1>Hello, Nginx!</h1>
+    <p>We have just configured our Nginx web server on Ubuntu Server!</p>
+</body>
+</html>)
+
+Step 3: Setting up virtual host 
+To set up virtual host, we need to create file in /etc/nginx/sites-enabled/ directory (use port 81)
+
+cd /etc/nginx/sites-enabled
+sudo "${EDITOR:-vi}" tutorial
+
+server {
+       listen 81;
+       listen [::]:81;
+
+       server_name example.ubuntu.com;
+
+       root /var/www/tutorial;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}
+
+sudo service nginx restart
+
+test site localhost:81 

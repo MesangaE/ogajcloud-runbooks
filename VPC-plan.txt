@@ -1,0 +1,38 @@
+ 192.168.0.0/16 BST-VPC
+Subnet-1 subnet PB-BST-1A 192.168.0.0/24 =
+for Bastion host
+
+
+10.0.0.0/16 PRDT-VPC
+4 private in AZ 1a
+4 privare in AZ 1b
+1 Public Subnets 1a and 1b and NACLs
+
+PR-NGINX-1A 10.0.1.0/24 =
+PR-NGINX-1B  10.0.2.0/24 =
+PR-TMCAT-1A 10.0.3.0/24 =
+PR-TMCAT-1B 10.0.4.0/24 =
+PR-MVN-1A   10.0.5.0/24 =
+PR-DB-1B   10.0.6.0/24  =
+PR-DB-1A   10.0.7.0/24 =
+PR-NLB-1A  10.0.8.0/24 =
+
+PB-ELB/NAT-1B 10.0.9.0/24 
+NAT-PRDT
+
+IGW-BST-VPC 
+IGW-PRDT-VPC 
+
+RT-BST-VPC 
+
+RT-PR-PRDT-VPC 
+RT-PB-PRDT-VPC 
+
+Transit gateways/attachments
+PRDT-TGW
+BST-TGW-ATTACH
+PRDT-TGW-ATTACH
+
+BASTION
+
+MVN-SERVER
