@@ -1,0 +1,12 @@
+<!-- Add the SonarCloud plugin -->
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+        <configuration>
+          <!-- Set the SonarCloud organization and token -->
+          <organization>my-organization</organization>
+          <token>abcdefghijklmnopqrstuvwxyz</token>
+        </configuration>
+      </plugin>
+teq-mupj-cfz
